@@ -158,6 +158,49 @@ class enemy_2
     }
 };
 
+class berd
+{
+    int weight;
+    int h;
+    int health;
+    public:
+    void spawn_snake()
+    {
+        weight = 1 + rand() % 2;
+        h = 5 + rand() % 5;
+        health = 1;
+    }
+    void attack_rat(rat obj)
+    {
+        if(obj.get_speed() == 0)
+        {
+            weight += obj.get_weight();
+            if(obj.get_poision() == 1)
+            {
+                health--;
+                h = 0;
+            }
+        }
+    }
+    void eat_apple(apple obj)
+    {
+        weight += obj.getWeight();
+        if(obj.getbad() > 0)
+        {
+            health--;
+            h = 0;
+        }
+    }
+    int get_weight()
+    {
+        return weight;
+    }
+    int get_h()
+    {
+        return h;
+    }
+};
+
 class snake
 {
     int len;
@@ -199,6 +242,17 @@ class snake
             health -= pt.get_enemy_damage();
             len += pt.get_enemy_weight();
             speed--;
+        }
+    }
+    void berd_at(berd obj)
+    {
+        if (obj.get_h() <= len)
+        {
+            len += obj.get_weight();
+        }
+        else
+        {
+            health--;
         }
     }
 };
